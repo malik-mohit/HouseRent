@@ -1,0 +1,64 @@
+﻿@model Model.LoginModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<a asp-controller="HouseRent" asp-action="Index" style="text-decoration:none; color:#346D6D">
+    <span class="material-symbols-outlined home-btn">
+        home
+    </span>
+</a>
+
+<div class="login">
+    <h2 class="login-heading">Welcome Back!</h2>
+    <p class="login-subheading">
+        Login to your account
+    </p>
+
+    <form id="login" class="login-form" method="post" asp-action="Login">
+        <div class="form-row">
+            <span>Email</span>
+            <input class="input input-full" asp-for="Email" />
+        </div>
+        <div class="form-row">
+            <span>Password</span>
+            <input type="password" class="input input-full" asp-for="Password" />
+        </div>
+        <div class="form-action">
+            <div class="remember-cont">
+                <input class="input-check" type="checkbox" />
+                <span>Remember Me</span>
+            </div>
+            <div class="forget">
+                <a href="#" class="forget-link">Forgot Password? </a>
+            </div>
+        </div>
+        <div class="login-btns-cont">
+            <button class="login-btn">Login</button>
+        </div>
+    </form>
+    <div class="reg-link">
+        <span>Don't have an account? </span>
+        <a asp-controller="Account" asp-action="Register" style="text-decoration:none; color:dodgerblue">  Sign Up</a>
+    </div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+@*<script>
+    $(function () {
+        $('#login').submit(function (event) {
+            event.preventDefault();
+            var form = $(this);
+            var url = form.attr('action');
+            var data = form.serialize();
+            $.post(url, data)
+                .done(function () {
+                    console.log(data);
+                })
+        })
+
+    });
+</script>
+*@

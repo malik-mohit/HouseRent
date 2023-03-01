@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - HouseRent</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/HouseRent.styles.css" asp-append-version="true" />
+</head>
+<body>
+    
+    <div class="main">
+        <div class="login-container">
+
+            <div class="login-img-cont">
+                <div class="login-img">
+                </div>
+            </div>
+            <div class="login-content">
+                @RenderBody()
+            </div>
+        </div>
+        @*<main role="main">
+           
+        </main>*@
+    </div>
+
+    @*<footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - houserent - <a asp-area="" asp-controller="home" asp-action="privacy">privacy</a>
+        </div>
+    </footer>*@
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

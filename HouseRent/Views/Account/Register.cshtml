@@ -1,0 +1,123 @@
+﻿@model Model.CustomerModel
+
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<a asp-controller="HouseRent" asp-action="Index" style="text-decoration:none; color:#346D6D">
+    <span class="material-symbols-outlined home-btn">
+        home
+    </span>
+</a>
+
+<div class="login">
+    <h2 class="login-heading">Welcome</h2>
+    <p class="login-subheading">
+        Register your account
+    </p>
+
+    <form id="register" class="login-form" method="post" asp-controller="Account" asp-action="Register">
+        <div class="form-row">
+            <span>Name</span>
+            <input class="input input-full" placeholder="Enter your Name" asp-for="Name" />
+            <span asp-validation-for="Name" class="val"></span>
+        </div><div class="form-row">
+            <span>Email</span>
+            <input class="input input-full" placeholder="Enter your Email" asp-for="Email" />
+            <span asp-validation-for="Email" class="val"></span>
+            <span class="error" asp-validation-for="Email">@ViewBag.Msg</span>
+        </div>
+        <div class="form-row">
+            
+            <span>Password</span>
+            <input type="password" class="input input-full" placeholder="Enter your Password" asp-for="Password" />
+            <span asp-validation-for="Password" class="val"></span>
+        </div>
+        <div class="form-row">
+            <div class="address">
+                <div class="input-half">
+                    <span>Mobile</span>
+                    <input type="tel" class="input " placeholder="+91" asp-for="Mobile" />
+                    <span asp-validation-for="Mobile" class="val"></span>
+                </div>
+                <div class="input-half">
+                    <span>Gender</span>
+                    <select id='gender' class="input select-options" asp-for="Gender">
+                        <option value="">Select your Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="others">Others</option>
+                    </select>
+                    <span asp-validation-for="Gender" class="val"></span>
+                </div>
+            </div>
+
+        </div>
+        <div class="form-row">
+            <span>Address</span>
+            <input placeholder="House no./ Street" class="input input-full" asp-for="Address" />
+            <span asp-validation-for="Address" class="val"></span>
+        </div>
+        <div class="form-row">
+            <div class="address">
+                <div class="input-half">
+                    <span>State</span>
+                    <select class="input select-options" id="SelectedStateId" asp-for="StateId" asp-items="@(new SelectList(@ViewBag.State, "StateId", "StateName"))">
+                        <option value='-1'>Select a State</option>
+                    </select>
+                    <span asp-validation-for="StateId" class="val"></span>
+                </div>
+                <div class="input-half">
+                    <span>City</span>
+                    <select class="input select-options" id="SelectedCityId" asp-for="CityId">
+                        <option value="-1">Select a City</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="login-btns-cont">
+            <button class="login-btn" type="submit">Register</button>
+
+        </div>
+    </form>
+    <div class="reg-link">
+        <span>Already have an account? </span>
+        <a asp-controller="Account" asp-action="Login" style="text-decoration:none; color:dodgerblue">  Sign In</a>
+    </div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script>
+
+    $(function () {
+        $('#SelectedStateId').change(function () {
+            var StateId = $(this).val();
+
+            $.ajax({
+                type: "GET",
+                url: "@Url.Action("GetCityList", "Account")",
+                data: { StateId: StateId },
+                success: function (data) {
+
+                    var cityList = $('#SelectedCityId');
+                    cityList.empty();
+                    cityList.append($(' <option value="-1">Select a City</option>'))
+                    $.each(data, function (i, city) {
+                        cityList.append($('<option value="' + city.cityId + '">' + city.cityName + '</option>'));
+                    });
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+
+
+        });
+    });
+
+</script>
+
+

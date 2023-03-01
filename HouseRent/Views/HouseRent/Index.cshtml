@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="background">
+   <div backgound-cont>
+        <video class="bg-video" autoplay loop muted >
+            <source src="~/assets/bg.mp4" type="video/mp4">
+        </video>
+        @*<img class="bg-video "src="~/assets/building4.jpg" alt="buildings" />*@
+        
+        <h1 class="heading">
+            Discover a <br /> place you will<br /> love to live.
+        </h1>
+        
+   </div>
+</div>
+<div class="cont">
+    <div class="blank">
+    </div>
+
+    <div class="content">
+        welcome
+        <button onclick="callFunc">CLICK ME</button>
+    </div>
+    <div class="search"></div>
+
+</div> 
+
+$(function callFunc() {
+        $('form').submit(function (event) {
+            event.preventDefault();
+            var form = $(this);
+            var url = form.attr('action');
+            var data = form.serialize();
+            $.post(url, data)
+                .done(function () {
+                    //window.location.href = '/houseRent/login';
+                })
+                .fail(function (xhr) {
+                    alert(xhr.responseText);
+                });
+        });
+        alert("Called")
+    });
